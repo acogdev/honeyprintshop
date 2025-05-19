@@ -1,3 +1,7 @@
+---
+title: Honey Print Shop
+---
+
 # Honey Print Shop
 
 Welcome to Honey Print Shop, your go-to destination for beautifully crafted prints. We specialize in creating unique designs that bring your ideas to life. Whether you're looking for custom artwork, prints for your home, or gifts for loved ones, we have something special for everyone.
