@@ -1,6 +1,9 @@
----
-title: Honey Print Shop
----
++++
+title = "Honey Print Shop"
+[paige.pages]
+disable_title = true
+
++++
 
 # Honey Print Shop
 
