@@ -13,6 +13,6 @@ Welcome to Honey Print Shop, your go-to destination for beautifully crafted prin
 
 - **Custom Prints**: Tailored designs to fit your vision.
 - **Artistic Creations**: Unique pieces that stand out.
-- **Quality Materials**: We use only the best materials for our prints.
+- **Fun Creations**: We love creating things that will make you smile.
 
 Explore our collection and find the perfect print that resonates with you!
