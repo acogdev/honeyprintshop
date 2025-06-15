@@ -1,18 +1,29 @@
 +++
-title = "Honey Print Shop"
+title = 'Honey Print Shop'
+
+[paige]
 [paige.pages]
 disable_title = true
-
 +++
 
-# Honey Print Shop
 
-Welcome to Honey Print Shop, your go-to destination for beautifully crafted prints. We specialize in creating unique designs that bring your ideas to life. Whether you're looking for custom artwork, prints for your home, or gifts for loved ones, we have something special for everyone.
+# "Designed by Us, Inspired by Life"
+## Meaningful prints from a husband-wife creative team
 
-## Our Offerings
+✨ Meaningful Art - Designs that connect and inspire
 
-- **Custom Prints**: Tailored designs to fit your vision.
-- **Artistic Creations**: Unique pieces that stand out.
-- **Fun Creations**: We love creating things that will make you smile.
+🎨 Husband & Wife Team - Authentic, personal touch in every piece
 
-Explore our collection and find the perfect print that resonates with you!
+📚 Focused Themes - Diabetes awareness & book lover collections
+
+### Featured Collections
+#### Diabetes Awareness
+Uplifting designs that celebrate strength and resilience
+[Show 2-3 product images]
+
+### Book Lovers
+#### Literary quotes, reading trackers, and bookish inspiration
+[Show 2-3 product images]
+
+## About
+We're a creative duo passionate about making art that matters. Every design starts with authentic connection to the themes we love - from diabetes awareness to celebrating the joy of reading.
