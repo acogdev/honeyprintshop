@@ -1,11 +1,11 @@
----
-title: "About"
-date: 2025-05-18
-url: about
-type: page
-_build:
-  list: never
----
++++
+date = '2025-05-18'
+title = 'About'
+type = 'page'
+url = 'about'
+[paige.pages]
+disable_title = true
++++
 # About Honey Print Shop
 
 ## Sweet Designs with Purpose
@@ -49,4 +49,5 @@ Thank you for supporting our small business.
 
 ---
 
-*Questions? We'd love to hear from you at [thehoneyprintshop@gmail.com.com]*
+*Questions? We'd love to hear from you via {{% paige/email address="thehoneyprintshop@gmail.com" %}}Email{{% /paige/email %}}*
+

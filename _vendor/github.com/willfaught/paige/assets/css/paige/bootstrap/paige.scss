@@ -1,0 +1,26 @@
+{{ $params := . }}
+
+{{ $color := $params.color }}
+{{ $colorscheme := $params.color_scheme }}
+
+{{ $auto := and (not (eq $colorscheme "dark")) (not (eq $colorscheme "light")) }}
+
+{{ if $auto }}
+    $color-mode-type: media-query;
+{{ end }}
+
+$breadcrumb-divider: quote("·");
+$primary: {{ $color }};
+
+$white: #ffffff;
+
+$light:      #ebe6d2;
+$dark:       #aabcaf;
+$primary:    #ceaaaa;
+$secondary:  #a27586;
+$info:       #f4b594;
+$success:    #76c333;
+$warning:    #fdcb90;
+$danger:     #fb206e;
+
+@import "bootstrap";

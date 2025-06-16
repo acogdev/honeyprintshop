@@ -1,9 +1,6 @@
 +++
 title = 'Honey Print Shop'
-
-[paige]
-[paige.pages]
-disable_title = true
+type = 'home'
 +++
 
 
@@ -22,7 +19,7 @@ Uplifting designs that celebrate strength and resilience
 [Show 2-3 product images]
 
 ### Book Lovers
-#### Literary quotes, reading trackers, and bookish inspiration
+Literary quotes, reading trackers, and bookish inspiration
 [Show 2-3 product images]
 
 ## About

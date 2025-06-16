@@ -15,12 +15,18 @@ ignoreConfig = false
 ignoreImports = false
 path = "github.com/willfaught/paige"
 
+[markup.goldmark.renderer]
+unsafe = true
+
 [params.paige.site]
 disable_breadcrumbs = true
-color = "#0d6efd" # Bootstrap primary color and theme color for Safari and Windows
+color = "#DECCA6" # Bootstrap primary color and theme color for Safari and Windows
 color_scheme = "auto" # Must be "auto", "dark", or "light"
 keyword_style = "text" # Must be "text" or "pills"
-menu_style = "underline" # Must be "links", "pills", "tabs", or "underline"
+menu_style = "tabs" # Must be "links", "pills", "tabs", or "underline"
+disable_credit = true
+description = "Designed by Us, Inspired by Life"
+
 
 [outputs]
 home = ["html", "paige-search", "atom", "rss"]
@@ -34,14 +40,14 @@ disable_edit = true
 disable_history = true
 disable_keywords = false
 disable_next = true
-disable_pages = false
 disable_prev = true
 disable_reading_time = true
 disable_sections = true
 disable_series = true
-disable_title = false
 disable_toc = true
 disable_word_count = true
+disable_title = true
+disable_pages = true
 
 [params.paige.subpages]
 disable_authors = true
