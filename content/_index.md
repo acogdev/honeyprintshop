@@ -3,6 +3,8 @@ title = 'Honey Print Shop'
 type = 'home'
 +++
 
+<!-- {{< paige/image alt="Extended Logo" breakpoints=true class="rounded-4 shadow mx-auto d-block" fetchpriority="high" height="20rem" loading="eager" process="webp" src="../assets/hps_extended.webp" >}} -->
+
 
 # "Designed by Us, Inspired by Life"
 ## Meaningful prints from a husband-wife creative team
