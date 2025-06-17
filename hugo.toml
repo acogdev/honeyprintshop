@@ -21,7 +21,7 @@ unsafe = true
 [params.paige.site]
 disable_breadcrumbs = true
 color = "#DECCA6" # Bootstrap primary color and theme color for Safari and Windows
-color_scheme = "light" # Must be "auto", "dark", or "light"
+color_scheme = "auto" # Must be "auto", "dark", or "light"
 keyword_style = "text" # Must be "text" or "pills"
 menu_style = "tabs" # Must be "links", "pills", "tabs", or "underline"
 disable_credit = true
