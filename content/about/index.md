@@ -20,13 +20,16 @@ We believe that art should do more than just look beautiful; it should connect a
 
 ## What We Create
 
-Our design journey begins with two communities particularly close to our hearts:
+Our design journey begins with three themes particularly close to our hearts:
 
 **Diabetes Awareness & Support**  
 Our diabetes-focused designs aim to spread awareness and offer encouragement through positive, uplifting artwork that celebrates resilience and strength.
 
 **Book Lovers & Reading Culture**  
 From literary quotes to reading trackers, we create designs that honor the joy, comfort, and adventure that books bring to life.
+
+**Travel & Adventure**  
+Whether it's wanderlust-inspiring typography, destination illustrations, or designs that capture the spirit of exploration, we create art for those who believe that adventure awaits around every corner.
 
 ## Our Process
 
@@ -50,4 +53,3 @@ Thank you for supporting our small business.
 ---
 
 *Questions? We'd love to hear from you via {{% paige/email address="thehoneyprintshop@gmail.com" %}}Email{{% /paige/email %}}*
-
