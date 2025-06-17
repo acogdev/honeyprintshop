@@ -1,0 +1,138 @@
+{{ $params := . }}
+
+{{ $color := $params.color }}
+{{ $colorscheme := $params.color_scheme }}
+
+{{ $auto := and (not (eq $colorscheme "dark")) (not (eq $colorscheme "light")) }}
+
+{{ if $auto }}
+    $color-mode-type: media-query;
+{{ end }}
+
+$breadcrumb-divider: quote("·");
+$primary: {{ $color }};
+
+$white: #f9f7f1;
+
+$light:      #ebe6d2;
+$dark:       #aabcaf;
+$primary:    #ceaaaa;
+$secondary:  #a27586;
+$info:       #f4b594;
+$success:    #76c333;
+$warning:    #fdcb90;
+$danger:     #fb206e;
+
+// Your custom theme colors (adjusted for auto-contrast)
+$light:      #ebe6d2;
+$dark:       #2d4a35; // Much darker green-gray for proper contrast
+$primary:    #ceaaaa;
+$secondary:  #6b4a5c; // Darker mauve-brown for proper contrast
+$info:       #f4b594;
+$success:    #76c333;
+$warning:    #fdcb90;
+$danger:     #c41650; // Darker pink-red for proper contrast
+
+// Grayscale colors (derived from your light/dark palette)
+$white:      #f8f6f0; // Slightly warmer white based on your light color
+$gray-100:   #f1ede0; // Slightly darker than your light
+$gray-200:   #e5dfc8; // Progression towards your light color
+$gray-300:   #d4ccb5; // 
+$gray-400:   #c2b8a2; // 
+$gray-500:   #8fa496; // Mid-tone between light and dark
+$gray-600:   #6e8371; // 
+$gray-700:   #4d624f; // Progression towards your dark
+$gray-800:   #3a4f3e; // 
+$gray-900:   #2d4a35; // Same as your new dark color
+$black:      #1f3025; // Even deeper version
+
+// Additional contrast variables
+$gray-100-text: $gray-800;  // Dark text on light backgrounds
+$gray-200-text: $gray-800;
+$gray-300-text: $gray-800;
+$gray-400-text: $gray-900;
+$gray-500-text: $gray-900;
+$gray-600-text: $white;     // Light text on darker backgrounds
+$gray-700-text: $white;
+$gray-800-text: $white;
+$gray-900-text: $white;
+
+// Body and text colors
+$body-bg:    $white;
+$body-color: $dark; // Using your new darker color
+
+// Link colors
+$link-color: $primary;
+$link-hover-color: darken($primary, 15%);
+
+// Border colors
+$border-color: $gray-300;
+$border-color-translucent: rgba($border-color, .175);
+
+// Component colors
+$component-active-color: $white;
+$component-active-bg: $primary;
+
+// Form colors
+$input-bg: $white;
+$input-border-color: $gray-400;
+$input-color: $dark; // Using your new darker color
+$input-placeholder-color: $gray-500;
+
+// Navigation colors
+$navbar-light-color: rgba($dark, .7);
+$navbar-light-hover-color: rgba($dark, .9);
+$navbar-light-active-color: $dark;
+$navbar-light-brand-color: $primary;
+$navbar-light-brand-hover-color: darken($primary, 10%);
+
+$navbar-dark-color: rgba($light, .7);
+$navbar-dark-hover-color: rgba($light, .9);
+$navbar-dark-active-color: $light;
+$navbar-dark-brand-color: $primary;
+$navbar-dark-brand-hover-color: lighten($primary, 10%);
+
+// Card colors
+$card-bg: $white;
+$card-border-color: $border-color;
+
+// Modal colors
+$modal-content-bg: $white;
+$modal-content-border-color: $border-color;
+$modal-backdrop-bg: $black;
+
+// Dropdown colors
+$dropdown-bg: $white;
+$dropdown-border-color: $border-color;
+$dropdown-link-color: $dark; // Using your new darker color
+$dropdown-link-hover-color: $dark;
+$dropdown-link-hover-bg: $gray-100;
+
+// Table colors
+$table-bg: transparent;
+$table-striped-bg: rgba($gray-200, .5);
+$table-hover-bg: rgba($gray-200, .75);
+$table-border-color: $border-color;
+
+// Offcanvas colors
+$offcanvas-bg-color: $white;
+$offcanvas-border-color: $border-color;
+
+// Accordion colors
+$accordion-bg: $white;
+$accordion-border-color: $border-color;
+
+// Pagination colors
+$pagination-bg: $white;
+$pagination-border-color: $gray-300;
+$pagination-hover-bg: $gray-100;
+$pagination-active-bg: $primary;
+$pagination-active-border-color: $primary;
+
+// Alert colors (using your theme colors with transparency)
+$alert-bg-scale: -80%;
+$alert-border-scale: -70%;
+$alert-color-scale: 40%;
+
+
+@import "bootstrap";
