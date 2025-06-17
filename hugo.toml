@@ -29,7 +29,7 @@ description = "Designed by Us, Inspired by Life"
 
 
 [outputs]
-home = ["html", "paige-search", "atom", "rss"]
+home = ["html"]
 
 [params.paige.pages]
 disable_authors = true
