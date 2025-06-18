@@ -52,4 +52,4 @@ Thank you for supporting our small business.
 
 ---
 
-*Questions? We'd love to hear from you via {{% paige/email address="thehoneyprintshop@gmail.com" %}}Email{{% /paige/email %}}*
+*Questions? We'd love to hear from you via [Email](mailto:thehoneyprintshop@gmail.com)*
