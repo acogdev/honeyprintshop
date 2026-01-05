@@ -74,6 +74,9 @@ style = """
     name = "About"
     pageRef = "/about"
     weight = 10
-
+  [[menu.main]]
+    name = "Store"
+    pageRef = "/store"
+    weight = 10
 
 
