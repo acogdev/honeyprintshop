@@ -1,21 +1,21 @@
 {
   "name": "Honey Print Shop",
-  "short_name": "Honey Print Shop",
+  "short_name": "Honey Print",
   "icons": [
     {
-      "src": "/web-app-manifest-192x192.png",
+      "src": "/web-app-manifest-192x192.png?v=20260702",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/web-app-manifest-512x512.png",
+      "src": "/web-app-manifest-512x512.png?v=20260702",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#EBE6D2",
-  "background_color": "#EBE6D2",
+  "theme_color": "#3d422f",
+  "background_color": "#3d422f",
   "display": "standalone"
 }
