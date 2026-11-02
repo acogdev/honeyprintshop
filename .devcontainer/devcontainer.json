@@ -12,10 +12,10 @@
 			"extended": true,
 			"version": "latest"
 		},
-		"ghcr.io/prplecake/devcontainer-features/dart-sass:1": {
+		"ghcr.io/devcontainers/features/node:1": {
 			"version": "latest"
 		}
-	}
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -25,6 +25,7 @@
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "uname -a",
+	"postCreateCommand": "npm install -g sass"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
