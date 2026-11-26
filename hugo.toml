@@ -90,11 +90,6 @@ style = """
     pageRef = "/collections/diabetes-awareness"
     weight = 1
   [[menu.main]]
-    name = "All Collections"
-    parent = "collections"
-    pageRef = "/collections"
-    weight = 0
-  [[menu.main]]
     name = "Book Lovers"
     parent = "collections"
     pageRef = "/collections/book-lovers"

@@ -1,17 +1,17 @@
 +++
 title = "Life's Adventures"
-description = 'Travel-inspired designs for explorers, dreamers, and curious minds.'
+description = 'Understated designs for favorite places, open roads, and the joy of discovery.'
 etsy_section_url = 'https://www.etsy.com/shop/HoneyThePrintShop?section_id=59294210'
 [paige.pages]
 disable_title = true
 +++
 
 
-The spirit of adventure can be found on a faraway trip, a weekend outing, or the simple decision to take a new route home. This collection is inspired by curiosity, open roads, and the memories people bring back from places they have explored. Its designs are for travelers, planners, and daydreamers who enjoy keeping a little reminder of discovery close at hand.
+A little more room for the next adventure. This collection gathers understated designs inspired by favorite places, open roads, and the curiosity that takes us beyond the familiar.
 
-Here you can browse artwork with a sense of movement and possibility, including pieces that make thoughtful gifts for travel companions and friends who are always planning their next destination. We like the way a map, a phrase, or a small visual detail can call to mind a favorite place or encourage someone to keep exploring. These are creative expressions rather than promises about any particular experience. Whether you are packing a bag, remembering a past journey, or simply imagining what might be around the next corner, we hope you find a design that speaks to your own sense of adventure.
+For a faraway journey or the simple decision to take a new route home, these pieces carry a quiet sense of discovery. Maps, small travel details, and carefully chosen words can keep a memory close or mark the beginning of somewhere new.
 
-[Shop this collection on Etsy](https://www.etsy.com/shop/HoneyThePrintShop?section_id=59294210){.btn .btn-primary .hps-shop-button}
+[Shop this collection on Etsy](https://www.etsy.com/shop/HoneyThePrintShop?section_id=59294210)
 
 {{< gallery collection="lifes-adventures" sort="date" eager="4" >}}
 

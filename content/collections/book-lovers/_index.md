@@ -1,17 +1,17 @@
 +++
 title = 'Book Lovers'
-description = 'Bookish designs for readers, bibliophiles, and anyone who loves a good story.'
+description = 'Literary designs for well-loved pages, quiet reading rituals, and one-more-chapter nights.'
 etsy_section_url = 'https://www.etsy.com/shop/HoneyThePrintShop?section_id=56641381'
 [paige.pages]
 disable_title = true
 +++
 
 
-For readers, a favorite book is often more than a story: it can be a companion, a place to wander, or the start of a conversation with someone who loves the same characters and ideas. This collection celebrates those small, familiar pleasures with designs inspired by reading, bookish humor, and the affection people have for their shelves and well-loved pages.
+For the chapters you stay up late for. This collection brings together thoughtful designs inspired by reading, bookish wit, crowded shelves, and the quiet rituals of a life with books.
 
-You will find artwork for quiet reading time, library trips, book-club gatherings, and gifts for friends who always have a book nearby. Some designs lean playful, while others are simple nods to the comfort and imagination that reading brings. We create each piece to share that enthusiasm without assuming there is only one way to be a reader. Whether you read every day, collect favorite editions, or are shopping for someone who does, we hope these designs help express the joy of getting lost in a good story.
+Find a subtle nod for library days and book-club evenings, or a playful gift for the friend who always has a novel nearby. Some pieces are understated; others have a little more personality. All leave room for the reader to define their own story.
 
-[Shop this collection on Etsy](https://www.etsy.com/shop/HoneyThePrintShop?section_id=56641381){.btn .btn-primary .hps-shop-button}
+[Shop this collection on Etsy](https://www.etsy.com/shop/HoneyThePrintShop?section_id=56641381)
 
 {{< gallery collection="book-lovers" sort="date" eager="4" >}}
 
