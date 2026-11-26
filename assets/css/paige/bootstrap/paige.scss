@@ -1,0 +1,58 @@
+$color-mode-type: media-query;
+$breadcrumb-divider: quote("·");
+
+$white: #f8f6f0;
+$gray-100: #f1ede0;
+$gray-200: #e5dfc8;
+$gray-300: #d4ccb5;
+$gray-400: #c2b8a2;
+$gray-500: #8fa496;
+$gray-600: #6e8371;
+$gray-700: #4d624f;
+$gray-800: #3a4f3e;
+$gray-900: #2d4a35;
+$black: #1f3025;
+
+$primary: #DECCA6;
+$secondary: #6b4a5c;
+$light: #ebe6d2;
+$dark: #2d4a35;
+$info: #f4b594;
+$success: #76c333;
+$warning: #fdcb90;
+$danger: #c41650;
+
+$body-bg: $white;
+$body-color: $dark;
+$link-color: $dark;
+$link-hover-color: darken($dark, 15%);
+$border-color: $gray-300;
+$border-color-translucent: rgba($border-color, .175);
+$component-active-color: $dark;
+$component-active-bg: $primary;
+$dropdown-bg: $white;
+$dropdown-border-color: $border-color;
+$dropdown-link-color: $dark;
+$dropdown-link-hover-color: $dark;
+$dropdown-link-hover-bg: $gray-100;
+
+@import "functions";
+@import "variables";
+@import "variables-dark";
+@import "maps";
+@import "mixins";
+@import "root";
+@import "reboot";
+@import "type";
+@import "images";
+@import "containers";
+@import "grid";
+@import "buttons";
+@import "transitions";
+@import "dropdown";
+@import "nav";
+@import "breadcrumb";
+@import "utilities";
+$utilities: ();
+@import "helpers";
+@import "utilities/api";

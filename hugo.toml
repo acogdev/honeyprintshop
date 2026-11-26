@@ -68,16 +68,45 @@ style = """
 #paige-page-content > .paige-shortcode-youtube { max-width: 100%; }
 """
 
+[params.etsy.section_collections]
+"56641381" = "book-lovers"
+"59294210" = "lifes-adventures"
+"56624970" = "diabetes-awareness"
 
 [menu]
 
   [[menu.main]]
+    name = "Featured"
+    pageRef = "/featured"
+    weight = 1
+  [[menu.main]]
+    name = "Collections"
+    identifier = "collections"
+    pageRef = "/collections"
+    weight = 2
+  [[menu.main]]
+    name = "Diabetes Awareness"
+    parent = "collections"
+    pageRef = "/collections/diabetes-awareness"
+    weight = 1
+  [[menu.main]]
+    name = "All Collections"
+    parent = "collections"
+    pageRef = "/collections"
+    weight = 0
+  [[menu.main]]
+    name = "Book Lovers"
+    parent = "collections"
+    pageRef = "/collections/book-lovers"
+    weight = 2
+  [[menu.main]]
+    name = "Life's Adventures"
+    parent = "collections"
+    pageRef = "/collections/lifes-adventures"
+    weight = 3
+  [[menu.main]]
     name = "About"
     pageRef = "/about"
     weight = 3
-  [[menu.main]]
-    name = "Store"
-    pageRef = "/store"
-    weight = 2
 
 

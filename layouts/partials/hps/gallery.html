@@ -1,0 +1,23 @@
+{{ $listings := .listings }}
+{{ $page := .page }}
+{{ $limit := .limit | default 0 }}
+{{ $eagerCount := 4 }}
+{{ if isset . "eagerCount" }}
+    {{ $eagerCount = .eagerCount }}
+{{ end }}
+
+{{ if and $limit (gt (len $listings) $limit) }}
+    {{ $listings = first $limit $listings }}
+{{ end }}
+
+{{ if $listings }}
+    <div class="hps-gallery">
+        {{ range $index, $listing := $listings }}
+            {{ $eager := lt $index $eagerCount }}
+            {{ $priority := eq $index 0 }}
+            {{ partial "hps/design-card.html" (dict "listing" $listing "page" $page "eager" $eager "priority" $priority) }}
+        {{ end }}
+    </div>
+{{ else }}
+    <p class="hps-gallery-empty">There are no active listings in this collection right now.</p>
+{{ end }}

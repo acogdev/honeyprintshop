@@ -1,0 +1,46 @@
+{{ $page := . }}
+{{ $collection := $page.RelPermalink | replaceRE "^/collections/([^/]+)/.*$" "$1" }}
+{{ $listings := slice }}
+{{ range site.Data.etsy.listings | default slice }}
+    {{ $sectionID := printf "%.0f" .section_id }}
+    {{ $collectionSlug := index site.Params.etsy.section_collections $sectionID }}
+    {{ if eq $collectionSlug $collection }}
+        {{ $listings = $listings | append . }}
+    {{ end }}
+{{ end }}
+{{ $listings = sort $listings "created_timestamp" "desc" }}
+
+{{ $items := slice }}
+{{ range $index, $listing := $listings }}
+    {{ $titleBeforePipe := index (split $listing.title "|") 0 }}
+    {{ $displayTitle := index (split $titleBeforePipe ",") 0 | strings.TrimSpace }}
+    {{ $imageURL := "" }}
+    {{ with $listing.images }}
+        {{ $image := index . 0 }}
+        {{ with $image.path }}
+            {{ $asset := resources.Get (printf "etsy/%s" .) }}
+            {{ with $asset }}
+                {{ $imageURL = .Permalink }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+    {{ $product := dict
+        "@type" "Product"
+        "name" $displayTitle
+        "image" $imageURL
+        "url" $listing.etsy_url
+        "brand" (dict "@type" "Brand" "name" "Honey Print Shop")
+    }}
+    {{ $items = $items | append (dict "@type" "ListItem" "position" (add $index 1) "item" $product) }}
+{{ end }}
+
+{{ $schema := dict
+    "@context" "https://schema.org"
+    "@type" "CollectionPage"
+    "name" $page.Title
+    "description" $page.Description
+    "url" $page.Permalink
+    "mainEntity" (dict "@type" "ItemList" "itemListElement" $items)
+}}
+
+<script type="application/ld+json">{{ $schema | jsonify | safeJS }}</script>

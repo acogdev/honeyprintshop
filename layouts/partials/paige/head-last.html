@@ -1,1 +1,10 @@
+{{ $galleryCSS := resources.Get "css/hps-gallery.css" | minify }}
+<style>{{ $galleryCSS.Content | safeCSS }}</style>
+
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{ if .Params.etsy_section_url }}
+    {{ partial "hps/collection-jsonld.html" . }}
+{{ end }}
+
 <script defer src="https://analytics.acogdev.com/script.js" data-website-id="075e00e5-f8e4-4074-81a4-ec88a2a1ccae"></script>

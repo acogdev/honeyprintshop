@@ -1,0 +1,40 @@
+{{ $collection := .Get "collection" }}
+{{ $featuredOnly := eq (.Get "featured") "true" }}
+{{ $sort := .Get "sort" | default "date" }}
+{{ $eagerCount := 4 }}
+{{ with .Get "eager" }}
+    {{ $eagerCount = int . }}
+{{ end }}
+{{ $limit := 0 }}
+{{ with .Get "limit" }}
+    {{ $limit = int . }}
+{{ end }}
+
+{{ $listings := site.Data.etsy.listings | default slice }}
+{{ if or $collection $featuredOnly }}
+    {{ $filtered := slice }}
+    {{ range $listings }}
+        {{ $sectionID := printf "%.0f" .section_id }}
+        {{ $matchesCollection := or (not $collection) (eq (index site.Params.etsy.section_collections $sectionID) $collection) }}
+        {{ $matchesFeatured := or (not $featuredOnly) .featured }}
+        {{ if and $matchesCollection $matchesFeatured }}
+            {{ $filtered = $filtered | append . }}
+        {{ end }}
+    {{ end }}
+    {{ $listings = $filtered }}
+{{ end }}
+
+{{ if eq $sort "featured" }}
+    {{ $listings = sort $listings "featured_order" }}
+{{ else if eq $sort "title" }}
+    {{ $listings = sort $listings "title" }}
+{{ else }}
+    {{ $listings = sort $listings "created_timestamp" "desc" }}
+{{ end }}
+
+{{ partial "hps/gallery.html" (dict
+    "listings" $listings
+    "page" .Page
+    "limit" $limit
+    "eagerCount" $eagerCount
+) }}

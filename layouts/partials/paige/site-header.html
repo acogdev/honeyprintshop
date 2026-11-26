@@ -42,10 +42,10 @@
                 <a href="{{ relLangURL `` }}">
 
                     {{ $image := resources.Get "logo/hps_h.png" }}
-                    {{ $image := $image.Process "resize 500x" }}
+                    {{ $image := $image.Process "resize 320x" }}
                     {{ $image := $image.Process "q90 webp" }}
 
-                    <img src="{{ $image.RelPermalink }}" class="img-fluid">
+                    <img src="{{ $image.RelPermalink }}" class="img-fluid" width="{{ $image.Width }}" height="{{ $image.Height }}" alt="{{ site.Title }}" fetchpriority="high">
 
 
                 </a>
@@ -145,6 +145,10 @@
                 </nav>
             {{ end }}
         {{ end }}
+
+        <div class="text-center mb-3">
+            <a class="btn btn-primary hps-shop-button" href="https://honeytheprintshop.etsy.com" target="_blank" rel="noopener noreferrer">Shop on Etsy</a>
+        </div>
 
         {{ with $breadcrumbs }}
             <nav aria-label="{{ i18n `paige_breadcrumbs` }}" class="paige-row-tall" id="paige-site-breadcrumbs">

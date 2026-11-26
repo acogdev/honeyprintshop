@@ -1,44 +1,167 @@
-# Honey Print Shop gallery planning
+# Honey Print Shop: Gallery and Collections Plan
 
-## Goal
+Implementation plan for a coding agent. Repo: github.com/acogdev/honeyprintshop (Hugo 0.147.8, Paige theme). Live site: honeyprintshop.com. Etsy shop: https://honeytheprintshop.etsy.com
 
-Build a static, data-driven gallery that sends visitors to Etsy listings; add pages for Diabetes Awareness, Book Lovers, and Adventure & Travel; refresh the homepage and Store page; and cover accessibility, SEO, social sharing, and an easy authoring workflow. Keep the existing visual style, do not edit `_vendor`, do not deploy, and do not invent product data. Use flagged placeholders when owner data is missing.
+## 1. Goal
 
-## Repo findings
+Turn the site from a thin landing page into a showcase that sends visitors to Etsy listings. Deliverables:
 
-- Repository was clean on `main`; no implementation changes were made.
-- Hugo site uses Paige v0.111.1 via vendored Hugo modules. CI pins Hugo 0.147.8; local Hugo is 0.169.0.
-- Existing content: homepage, Store, About. Homepage uses Paige gallery/image shortcodes for two images in each of three collections. Store is currently a one-line Etsy link.
-- Existing theme overrides are `layouts/partials/paige/site-header.html`, `page.html`, and `head-last.html`. Preserve the custom header/logo and use theme override hooks; never edit `_vendor`.
-- Paige supports menu dropdowns. The custom header reads `site.Menus.main`.
-- Paige already generates Open Graph and Twitter metadata. Its links partial does not emit a canonical `<link>`, so add canonical markup without duplicating existing OG/Twitter tags.
-- `hugo.toml` enables `robots.txt`; Hugo's default sitemap behavior should be checked in the generated site.
-- `layouts/partials/paige/head-last.html` currently loads an analytics script from `analytics.acogdev.com`. Owner chose to defer this decision; leave it unchanged for now and add no analytics.
-- There are eight source images in `assets/designs/`, not six: `adventure.png`, `adventure2.png`, `bibliophile.png`, `bolus for donuts.png`, `dream impossible.png`, `kindness.png`, `thats not how this works.png`, and `who’s afraid.png`. All are portrait, approximately 1555/1556 × 2000. `dream impossible.png` is about 1.7 MB. Confirm active status, collection, title, alt text, and cover-vs-flat role before migration. Avoid blindly square-cropping portrait artwork.
+- A data-driven gallery of designs, each card linking to its Etsy listing.
+- One page per collection (/collections/diabetes-awareness/, /collections/book-lovers/, /collections/lifes-adventures/) with intro copy, a grid, and a link to that Etsy shop section.
+- A Featured page populated from Etsy's featured listings endpoint.
+- A full Store gallery page and a homepage showing only the newest listings.
+- SEO, sharing, and accessibility basics, plus a simple workflow for adding a new design in a few minutes.
 
-## Owner data / blockers
+## 2. Current implementation
 
-- User supplied two Etsy section URLs:
-  - `https://www.etsy.com/shop/HoneyThePrintShop?section_id=56641381`
-  - `https://www.etsy.com/shop/HoneyThePrintShop?section_id=59294210`
-- Their mapping to the three collections is unknown; no third section URL or individual listing URLs were provided.
-- Etsy shop and both section pages returned HTTP 403 from the available web fetch and direct curl paths, so active listings could not be verified. Do not infer listing URLs. The plan permits clearly marked placeholders until the owner supplies data.
-- User did not provide the requested asset/listing mapping; use placeholders and list them clearly in the PR description unless supplied later.
+- The homepage contains only the 8 newest Etsy listings. `/featured/` contains the current Etsy featured set in Etsy's returned order.
+- `/store/` remains as a full gallery page, but the Store header tab has been removed. The header has Featured, a Collections dropdown with an All Collections link, About, and a Shop on Etsy button.
+- Collection pages are `/collections/diabetes-awareness/`, `/collections/book-lovers/`, and `/collections/lifes-adventures/` (Life's Adventures).
+- `scripts/sync_etsy.py` locally fetches active listings, Etsy's featured listing IDs/order, and each listing's primary image. It writes `data/etsy/listings.json` and `assets/etsy/`; Hugo and deploy do not need Etsy credentials.
+- The sync omits Etsy prices. Display titles and image alt text use the decoded Etsy title up to the first comma or pipe.
+- Images are square Etsy thumbnails; gallery cards use square image frames and fixed-height, two-line title areas.
+- Existing Paige overrides are preserved. No files in `_vendor` are modified. The existing analytics script in `head-last.html` is unchanged.
+- Hugo 0.147.8 builds successfully. The build currently emits upstream Dart Sass/Bootstrap deprecation warnings.
 
-## Implementation recommendations / caveats
+## 3. Ground rules
 
-- A design bundle with `build.render: never` can support a data-driven gallery without creating product pages. However, Pinterest's `url` parameter must point to a real published page (such as the collection or Store page), not the non-rendered design page. Alternatively, publish individual design pages if that behavior is desired.
-- Collection-page `Product` entries without offers may be valid Schema.org markup but are not guaranteed to qualify for Google Product rich results. Treat structured-data validation separately from rich-result eligibility.
-- Keep static/JS-disabled behavior; shortcode can call a shared gallery partial. Use Hugo image processing and ensure the actual rendered/cropped composition preserves the artwork.
-- Preserve Paige-generated OG/Twitter metadata; extend the head using the existing hook. Add canonical links explicitly.
-- Keep existing analytics script unchanged pending owner decision.
-- Validate using the CI Hugo version (0.147.8), including the requested minified/clean build and Docker/workflow checks when implementation is resumed. Lighthouse goals should be measured, not promised before checking the existing analytics and generated image payloads.
+- Never edit \_vendor. Override theme files by placing a file at the same path under layouts/ or assets/.
+- Static output only. The gallery must work with JavaScript disabled; JS is optional enhancement.
+- Match the existing look (theme color #DECCA6, current logo and typography). Do not redesign the site.
+- Do not invent Etsy listing URLs, prices, or product claims. Use the owner-supplied data; where missing, use a clearly marked placeholder and list it in the PR description.
+- Work on a feature branch with small commits and open a PR. Do not deploy and do not change the Dockerfile unless the build requires it.
+- Keep copy respectful and factual, especially for Diabetes Awareness. No medical claims.
 
-## Proposed phases from the owner plan
+## 4. Step 0: discovery (completed)
 
-1. Data model, archetype, card/gallery partials and CSS; migrate confirmed designs; rebuild Store.
-2. Collection pages and homepage; menu navigation and Etsy CTA.
-3. SEO, JSON-LD, OG image selection, Pinterest links, and README authoring workflow.
-4. Optional later work: lightbox, JS filtering, or design-creation script.
+1. Read hugo.toml, go.mod, the Dockerfile, .github workflows, and every file under content/, layouts/, assets/, static/, archetypes/.
+2. Read the Paige theme source in \_vendor: how it resolves layouts, which partials and shortcodes it exposes, how to inject custom CSS and head tags, how the header nav is configured, whether it supports dark mode, and how it builds OG/Twitter meta.
+3. Ran the CI-pinned Hugo server and verified the homepage, Store, and collection pages return successfully.
+4. Paige uses the existing `layouts/partials/paige/site-header.html` and `head-last.html` overrides; these were extended without editing `_vendor`. Phase 3 is complete: every generated page has a canonical URL, collection pages emit CollectionPage/ItemList JSON-LD, and collection pages have listing-based social images without duplicating Paige's OG/Twitter tags.
 
-The gallery itself has not been implemented or deployed. Resume by confirming the image inventory and Etsy URL/section mapping (or proceeding with explicit placeholders), then implement in small phases.
+## 5. Data model
+
+Use Etsy as the product-data source. A local sync command writes Hugo's JSON
+data file and downloads each active listing's primary image; the public site
+remains static and builds without Etsy credentials.
+
+```
+content/
+  collections/
+    _index.md                 # collections overview
+    diabetes-awareness/_index.md
+    book-lovers/_index.md
+    lifes-adventures/_index.md
+  featured/
+    index.md                  # gallery of Etsy featured listings
+data/
+  etsy/
+    listings.json             # generated by scripts/sync_etsy.py
+assets/
+  etsy/
+    <listing-id>/image-<rank>.jpg
+```
+
+Each synchronized listing stores:
+
+```json
+{
+  "listing_id": 123,
+  "title": "Listing title from Etsy",
+  "etsy_url": "Listing URL from Etsy",
+  "section_id": 456,
+  "featured": true,
+  "featured_order": 0,
+  "created_timestamp": 1700000000,
+  "images": [{"path": "123/image-1.jpg"}]
+}
+```
+
+Notes:
+
+- Run `uv run --no-project --python 3.12 python scripts/sync_etsy.py` locally to retrieve active listings and their primary images. Never call Etsy during Hugo builds or deployment.
+- The sync also retrieves up to 20 Etsy featured listing IDs and their order; `/featured/` displays that set in the same order.
+- The sync prunes images for inactive listings and removes stale primary-image files for active listings.
+- Send Etsy API credentials only to `openapi.etsy.com`; image CDN requests must be unauthenticated and limited to HTTPS `etsystatic.com` hosts.
+- Persist only the fields in the data model above. Do not retain descriptions, update timestamps, prices, or Etsy-provided alt text.
+- Map Etsy section IDs to collection slugs in `hugo.toml`; active listings in unmapped sections appear in the Store gallery only.
+- Listing titles before the first comma or pipe are used as the displayed title and alt text.
+- Collection \_index.md front matter: title, description (used as meta description), intro copy in the body, and `etsy_section_url` (link to that section of the Etsy shop).
+- Do not infer listing URLs or collection assignments; use API fields and the confirmed section map. Do not fetch or display Etsy prices.
+
+## 6. Templates and components
+
+Place these in the location the theme expects for overrides (confirm in Step 0); suggested paths are shown.
+
+- layouts/partials/hps/design-card.html: one card. An anchor wraps the square image and full-width title caption; the image alt and visible title use the Etsy title before the first comma or pipe. The Etsy link includes `rel="noopener noreferrer"` and UTM parameters.
+- layouts/partials/hps/gallery.html: takes a list of synchronized listings plus optional limit and eager-count; renders the grid of cards.
+- layouts/shortcodes/gallery.html: lets content files embed the gallery. Params: collection, featured (bool), limit, sort (date, title, or Etsy featured order).
+- Images: use Hugo image processing to generate webp at widths 320, 480, 640, 960. Emit srcset and sizes, explicit width and height attributes (prevents layout shift), `loading="lazy"` except the first four cards on a page, and `decoding="async"`.
+- Use square gallery cards for the square Etsy primary images.
+- Optional future enhancement: if additional listing images are synchronized, show them on hover or focus via CSS. Skip on touch.
+- Pinterest share links were intentionally omitted at the owner's request.
+- CSS: one new stylesheet (for example assets/css/hps-gallery.css), included via the theme's mechanism for custom CSS or head injection. Use CSS grid with `repeat(auto-fill, minmax(min(100%, 16rem), 1fr))`, square aspect ratio with object-fit: cover, visible :focus-visible outlines, `prefers-reduced-motion` respected, and colors taken from existing theme variables so dark mode (if the theme has it) keeps working.
+
+## 7. Pages
+
+**Homepage.** Show only a Newest Designs gallery with the 8 most recent listings.
+
+**Featured (/featured/).** Show Etsy's featured listings in the order returned by the featured listings API endpoint.
+
+**Store (/store/).** Keep the full gallery sorted newest first, collection links, and a prominent Shop on Etsy button. The Store page is not in the header navigation.
+
+**Collection pages (/collections/\<slug>/).** H1, intro copy (150-300 words), grid of all designs in that collection, Shop this collection on Etsy button (etsy\_section\_url), and links to the other collections. Breadcrumbs are intentionally disabled. The collection intro copy has been reviewed and approved by the owner. For Diabetes Awareness, keep it warm and community-focused (strength, humor, resilience) with no health claims.
+
+**Navigation.** Featured and Collections (with All Collections and the three collection pages as dropdown items) appear in the header; the Store tab is removed. Keep About and the Shop on Etsy button.
+
+**About.** Leave the copy alone. Optionally add an empty slot for a photo of the two of you; owner supplies the image.
+
+## 8. SEO and sharing
+
+- Unique title and meta description per collection page. Descriptions come from front matter.
+- Use the listing title before its first comma or pipe as image alt text.
+- Structured data on collection pages: CollectionPage plus an ItemList of Product entries (name, image, url pointing to the Etsy listing, brand Honey Print Shop). Do not include offers or prices. Validate with Google Rich Results Test.
+- Open Graph and Twitter: per-collection og:image from the first design, and twitter:card set to summary\_large\_image on pages with images. Check what Paige emits first and extend rather than duplicate.
+- Confirm a sitemap.xml and robots.txt exist and include /collections/ and /store/. Canonical URLs on every page.
+- Do not add analytics. UTM parameters on Etsy links are the only tracking change.
+
+## 9. Performance and accessibility
+
+- Targets: Lighthouse mobile scores of at least 95 for Performance, Accessibility, and SEO on the homepage, /store/, and each collection page.
+- No layout shift from images, no render-blocking JS, total page weight under about 1 MB on first load (lazy loading past the fold).
+- Keyboard: every card reachable and operable, visible focus, touch targets at least 44px.
+- Contrast at least WCAG AA against the theme colors.
+
+## 10. Authoring workflow (what the owner does to add a design)
+
+1. Update the listing and its photos in Etsy.
+2. Run `uv run --no-project --python 3.12 python scripts/sync_etsy.py` to refresh local metadata and primary images.
+3. Review the diff, run the Hugo build, and commit the generated data/assets.
+
+The sync is an explicit authoring step; do not put Etsy credentials in CI or
+the site output.
+
+## 11. Phases and PR plan
+
+- **Phase 1: complete** — Etsy sync, data model, card/gallery partials, CSS, Store page.
+- **Phase 2: complete** — collection pages, homepage, Featured page, and header navigation.
+- **Phase 3: complete** — canonical URLs are on every generated page; collection pages use CollectionPage/ItemList JSON-LD with listing name, local image, Etsy URL, and brand (never offers or prices); each collection has its first local listing image in Open Graph and Twitter metadata without duplicate Paige social tags. Pinterest share links are omitted at the owner's request. Current mobile Lighthouse scores are recorded in `plan-notes.md`. The internal link/resource audit and Docker build passed.
+- **Phase 4 (optional):** lightbox using a native dialog element with vanilla JS, optional JS filtering on /store/, new-design script.
+
+## 12. Acceptance criteria
+
+- `hugo --minify --cleanDestinationDir --gc` succeeds with no errors, and the Docker image builds. The tag-triggered GitHub workflow is left unchanged and is not run for PR validation.
+- Every synchronized card links to its Etsy URL and works with JavaScript disabled.
+- Running the sync updates listings/images; active listings appear on the homepage and Store page, mapped sections appear on their collection page, and Featured mirrors Etsy's featured IDs/order.
+- All three collection pages render with intro copy, gallery, and Etsy section link.
+- Validation completed: generated canonical tags, JSON-LD, and social metadata were inspected; the documented mobile Lighthouse targets and site-wide internal link/resource review passed; the Docker build passed. The GitHub workflow is tag-triggered and was not run.
+- Nothing in \_vendor was modified.
+
+## 13. Remaining owner input
+
+- Collection intro copy reviewed and approved by the owner.
+- Optional: an About page photo.
+
+## 14. Out of scope
+
+Deploy or hosting changes, a cart or checkout on the site, analytics or tracking scripts, newsletter signup, and any redesign of the logo or color palette.

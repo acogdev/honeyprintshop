@@ -1,0 +1,69 @@
+{{ $listing := .listing }}
+{{ $page := .page }}
+{{ $eager := .eager }}
+{{ $priority := .priority }}
+{{ $titleBeforePipe := index (split $listing.title "|") 0 }}
+{{ $displayTitle := index (split $titleBeforePipe ",") 0 | strings.TrimSpace }}
+{{ $image := dict }}
+{{ with $listing.images }}
+    {{ $image = index . 0 }}
+{{ end }}
+{{ $asset := false }}
+{{ with $image.path }}
+    {{ $asset = resources.Get (printf "etsy/%s" .) }}
+{{ end }}
+{{ if not $asset }}
+    {{ warnf "Etsy listing %.0f has no local primary image." $listing.listing_id }}
+{{ end }}
+
+{{ $srcset := slice }}
+{{ $src := "" }}
+{{ if $asset }}
+    {{ $src = $asset.RelPermalink }}
+    {{ range slice 320 480 640 960 }}
+        {{ if le . $asset.Width }}
+            {{ $resized := $asset.Resize (printf "%dx webp q82" .) }}
+            {{ $srcset = $srcset | append (printf "%s %dw" $resized.RelPermalink .) }}
+            {{ if eq . 480 }}
+                {{ $src = $resized.RelPermalink }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ $sectionID := printf "%.0f" $listing.section_id }}
+{{ $campaign := index site.Params.etsy.section_collections $sectionID | default "store" }}
+{{ $separator := cond (strings.Contains $listing.etsy_url "?") "&" "?" }}
+{{ $etsyURL := printf "%s%sutm_source=honeyprintshop.com&utm_medium=website&utm_campaign=%s" $listing.etsy_url $separator $campaign }}
+
+<article class="hps-design-card">
+    {{ if $listing.etsy_url }}
+        <a class="hps-design-card__link" href="{{ $etsyURL }}" target="_blank" rel="noopener noreferrer" aria-label="{{ $displayTitle }}, view on Etsy">
+    {{ end }}
+        <figure class="hps-design-card__figure">
+            <div class="hps-design-card__image">
+                {{ if $asset }}
+                    <img
+                        src="{{ $src }}"
+                        {{ with $srcset }}srcset="{{ delimit . `, ` }}"{{ end }}
+                        sizes="(max-width: 48rem) 100vw, (max-width: 75rem) 50vw, 33vw"
+                        width="{{ $asset.Width }}"
+                        height="{{ $asset.Height }}"
+                        alt="{{ $displayTitle }}"
+                        loading="{{ if $eager }}eager{{ else }}lazy{{ end }}"
+                        decoding="async"
+                        {{ if $priority }}fetchpriority="high"{{ else if $eager }}fetchpriority="low"{{ end }}>
+                {{ else }}
+                    <div class="hps-design-card__placeholder" role="img" aria-label="Image unavailable for {{ $displayTitle }}">Image unavailable</div>
+                {{ end }}
+            </div>
+            <figcaption class="hps-design-card__caption">
+                <span class="hps-design-card__title">{{ $displayTitle }}</span>
+            </figcaption>
+        </figure>
+    {{ if $listing.etsy_url }}
+        </a>
+    {{ else }}
+        {{ warnf "Etsy listing %.0f has no listing URL and cannot be linked." $listing.listing_id }}
+    {{ end }}
+</article>
